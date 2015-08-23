@@ -7,13 +7,16 @@ import de.yellowapple.ld33.LD33Main;
 
 public class HtmlLauncher extends GwtApplication {
 
-        @Override
-        public GwtApplicationConfiguration getConfig () {
-                return new GwtApplicationConfiguration(480, 320);
-        }
+	int width = LD33Main.resolutionWidth;
+	int height = LD33Main.resolutionHeight;
 
-        @Override
-        public ApplicationListener getApplicationListener () {
-                return new LD33Main();
-        }
+	@Override
+	public GwtApplicationConfiguration getConfig() {
+		return new GwtApplicationConfiguration(width, height);
+	}
+
+	@Override
+	public ApplicationListener getApplicationListener() {
+		return new LD33Main();
+	}
 }
