@@ -3,7 +3,6 @@ package de.yellowapple.ld33.objects.levelbuilding;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 import de.yellowapple.ld33.objects.BasicGameObject;
 
 public class LevelBuildingElement extends BasicGameObject{
@@ -13,7 +12,7 @@ public class LevelBuildingElement extends BasicGameObject{
 	Texture tex;
 	
 	public LevelBuildingElement(float x, float y, SpriteBatch spritebatch, ShapeRenderer shaperenderer, Texture tex) {
-		super(x, y, 30, 30, spritebatch, shaperenderer);
+		super(x, y, 50, 50, spritebatch, shaperenderer);
 		this.tex = tex;
 		levelElementWidth = width;
 		levelElementHeight = height;

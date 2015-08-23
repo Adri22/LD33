@@ -22,15 +22,18 @@ public class Player extends Actor {
 	// private Animator attackAnimation;
 
 	public Player(float x, float y, SpriteBatch spritebatch, ShapeRenderer shaperenderer, ObjectHandler objectHandler) {
-		super(x, y, 100, 100, spritebatch, shaperenderer, objectHandler, 
-				new PlayerMovement(), new PlayerHatchlingAttack(x, y, spritebatch, shaperenderer, objectHandler));
+		super(x, y, 100, 100, 
+				spritebatch, 
+				shaperenderer, 
+				objectHandler, 
+				new PlayerMovement(), 
+				new PlayerHatchlingAttack(x, y, spritebatch, shaperenderer, objectHandler));
 		idleSprite = new Texture("sprites/player_spider_idle_sprite.png");
 		walkSprite = new Texture("sprites/player_spider_walking_sprite.png");
 		jumpSprite = new Texture("sprites/player_spider_jumping_sprite.png");
 		idleAnimation = new Animator(1, 3, idleSprite, 0.80f);
 		walkAnimation = new Animator(1, 3, walkSprite, 0.80f);
 		jumpAnimation = new Animator(1, 1, jumpSprite, 0.80f);
-		// private Animator attackAnimation;
 		currentAnimation = idleAnimation;
 		hp = 100;
 	}
@@ -51,16 +54,10 @@ public class Player extends Actor {
 		if (isJumping) {
 			currentAnimation = jumpAnimation;
 			velocityY -= GameScreen.WORLD_GRAVITY;
-
-			// just for testing
-			// replace this with collision-handling
-			//
-			if (posY <= 0) {
-				posY = 0;
-				velocityY = 0;
-				isJumping = false;
-				currentAnimation = idleAnimation;
-			}
+		}
+		
+		if(collision){
+			currentAnimation = idleAnimation;
 		}
 	}
 	

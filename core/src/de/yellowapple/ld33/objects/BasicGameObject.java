@@ -3,10 +3,7 @@ package de.yellowapple.ld33.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-
-import de.yellowapple.ld33.ObjectHandler;
 import de.yellowapple.ld33.objects.levelbuilding.LevelBuildingElement;
 
 public abstract class BasicGameObject {
@@ -19,7 +16,8 @@ public abstract class BasicGameObject {
 	protected float height;
 
 	public BasicGameObject(float x, float y, int width, int height,
-			SpriteBatch spritebatch, ShapeRenderer shaperenderer) {
+			SpriteBatch spritebatch, 
+			ShapeRenderer shaperenderer) {
 		this.posX = x * LevelBuildingElement.levelElementWidth;
 		this.posY = y * LevelBuildingElement.levelElementHeight;
 		this.width = width;
@@ -65,9 +63,37 @@ public abstract class BasicGameObject {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle((int) posX, (int) posY, (int) width, (int) height);
+		return new Rectangle(
+				(int) ((int) posX + (width / 2) - ((width / 2) / 2)),
+				(int) ((int) posY + (height / 2)),
+				(int) width / 2,
+				(int) height / 2);
 	}
 
+	public Rectangle getBoundsTop() {
+		return new Rectangle((int) (
+			(int) posX + (width / 2) - ((width / 2) / 2)),
+			(int) posY,
+			(int) width / 2,
+			(int) height / 2);
+    }
+
+    public Rectangle getBoundsRight() {
+		return new Rectangle(
+			(int) ((int) posX + width),
+			(int) posY,
+			(int) 1,
+			(int) height);
+    }
+
+    public Rectangle getBoundsLeft() {
+		return new Rectangle(
+			(int) posX,
+			(int) posY,
+			(int) 1,
+			(int) height);
+    }
+	    
 	public abstract void update();
 
 	public abstract void render();

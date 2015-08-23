@@ -15,13 +15,11 @@ public class Animator {
 	private int rows;
 	private int cols;
 
-	public Animator(int frameRows, int frameCols, Texture t,
-			float animationSpeed) {
+	public Animator(int frameRows, int frameCols, Texture t, float animationSpeed) {
 		rows = frameRows;
 		cols = frameCols;
 		sheet = t;
-		TextureRegion[][] tmp = TextureRegion.split(sheet,
-				sheet.getWidth() / cols, sheet.getHeight() / rows);
+		TextureRegion[][] tmp = TextureRegion.split(sheet, sheet.getWidth() / cols, sheet.getHeight() / rows);
 		frames = new TextureRegion[rows * cols];
 		int index = 0;
 		for (int i = 0; i < rows; i++) {

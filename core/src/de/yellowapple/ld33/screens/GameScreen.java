@@ -2,13 +2,11 @@ package de.yellowapple.ld33.screens;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-
 import de.yellowapple.ld33.BufferedImageLoader;
 import de.yellowapple.ld33.InputHandler;
 import de.yellowapple.ld33.LD33Main;
@@ -19,7 +17,6 @@ import de.yellowapple.ld33.objects.Hound;
 import de.yellowapple.ld33.objects.Knight;
 import de.yellowapple.ld33.objects.Player;
 import de.yellowapple.ld33.objects.levelbuilding.BasicBlock;
-import de.yellowapple.ld33.objects.levelbuilding.LevelBuildingElement;
 
 public class GameScreen implements Screen {
 
@@ -122,32 +119,25 @@ public class GameScreen implements Screen {
 
 				// black => basic-level-element
 				if (red == 0 && green == 0 && blue == 0) {
-					BasicGameObject element = new BasicBlock(stepX, stepY,
-							game.spritebatch, game.shaperenderer);
+					BasicGameObject element = new BasicBlock(stepX, stepY, game.spritebatch, game.shaperenderer);
 					objectHandler.addObject(element);
 				}
 
 				// blue => player startposition
 				if (red == 0 && green == 0 && blue == 255) {
-					BasicGameObject player = new Player(stepX, stepY,
-							game.spritebatch, game.shaperenderer,
-							objectHandler);
+					BasicGameObject player = new Player(stepX, stepY, game.spritebatch, game.shaperenderer, objectHandler);
 					objectHandler.addObject(player);
 					input.setControlledObject((Actor) player);
 				}
 
 				// green => knight startposition
 				if (red == 0 && green == 255 && blue == 0) {
-					objectHandler.addObject(
-							new Knight(stepX, stepY, game.spritebatch,
-									game.shaperenderer, objectHandler));
+					objectHandler.addObject(new Knight(stepX, stepY, game.spritebatch, game.shaperenderer, objectHandler));
 				}
 
 				// red => hound startposition
 				if (red == 255 && green == 0 && blue == 0) {
-					objectHandler
-							.addObject(new Hound(stepX, stepY, game.spritebatch,
-									game.shaperenderer, objectHandler));
+					objectHandler.addObject(new Hound(stepX, stepY, game.spritebatch, game.shaperenderer, objectHandler));
 				}
 			}
 		}

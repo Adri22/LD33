@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.yellowapple.ld33.Animator;
 import de.yellowapple.ld33.ObjectHandler;
-import de.yellowapple.ld33.behaviours.AttackBehaviour;
-import de.yellowapple.ld33.behaviours.MovementBehaviour;
 import de.yellowapple.ld33.behaviours.attacking.HatchlingAttack;
 import de.yellowapple.ld33.behaviours.movements.HatchlingMovement;
 
@@ -17,8 +15,16 @@ public class Hatchling extends Actor{
 	private Animator walkAnimation;
 	private Animator cocoonAnimation;
 	
-	public Hatchling(float x, float y, SpriteBatch spritebatch, ShapeRenderer shaperenderer, ObjectHandler objectHandler) {
-		super(x, y, 20, 20, spritebatch, shaperenderer, objectHandler, new HatchlingMovement(), new HatchlingAttack());
+	public Hatchling(float x, float y, 
+			SpriteBatch spritebatch, 
+			ShapeRenderer shaperenderer, 
+			ObjectHandler objectHandler) {
+		super(x, y, 20, 20, 
+				spritebatch, 
+				shaperenderer, 
+				objectHandler, 
+				new HatchlingMovement(), 
+				new HatchlingAttack());
 		walkSprite = new Texture("sprites/small_spider_walking_sprite.png");
 		cocoonSprite = new Texture("sprites/small_spider_cocoon_sprite.png");
 		walkAnimation = new Animator(1, 2, walkSprite, 0.30f);
