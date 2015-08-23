@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.yellowapple.ld33.Animator;
+import de.yellowapple.ld33.ObjectHandler;
 import de.yellowapple.ld33.behaviours.attacking.PlayerHatchlingAttack;
 import de.yellowapple.ld33.behaviours.movements.PlayerMovement;
 import de.yellowapple.ld33.screens.GameScreen;
@@ -20,10 +21,9 @@ public class Player extends Actor {
 	private Animator jumpAnimation;
 	// private Animator attackAnimation;
 
-	public Player(float x, float y, int width, int height,
-			SpriteBatch spritebatch, ShapeRenderer shaperenderer) {
-		super(x, y, width, height, spritebatch, shaperenderer,
-				new PlayerMovement(), new PlayerHatchlingAttack());
+	public Player(float x, float y, SpriteBatch spritebatch, ShapeRenderer shaperenderer, ObjectHandler objectHandler) {
+		super(x, y, 100, 100, spritebatch, shaperenderer, objectHandler, 
+				new PlayerMovement(), new PlayerHatchlingAttack(x, y, spritebatch, shaperenderer, objectHandler));
 		idleSprite = new Texture("sprites/player_spider_idle_sprite.png");
 		walkSprite = new Texture("sprites/player_spider_walking_sprite.png");
 		jumpSprite = new Texture("sprites/player_spider_jumping_sprite.png");
@@ -36,7 +36,9 @@ public class Player extends Actor {
 	}
 
 	@Override
-	public void update() {
+	public void update(){
+		super.update();
+		
 		posX += velocityX;
 		posY += velocityY;
 
@@ -61,7 +63,7 @@ public class Player extends Actor {
 			}
 		}
 	}
-
+	
 	public int getHp() {
 		return hp;
 	}

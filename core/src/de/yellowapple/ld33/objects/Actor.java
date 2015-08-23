@@ -1,13 +1,19 @@
 package de.yellowapple.ld33.objects;
 
+import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.yellowapple.ld33.Animator;
+import de.yellowapple.ld33.ObjectHandler;
 import de.yellowapple.ld33.behaviours.AttackBehaviour;
 import de.yellowapple.ld33.behaviours.MovementBehaviour;
+import de.yellowapple.ld33.objects.levelbuilding.BasicBlock;
+import de.yellowapple.ld33.objects.levelbuilding.LevelBuildingElement;
+import de.yellowapple.ld33.screens.GameScreen;
 
 public abstract class Actor extends BasicGameObject {
 
+	protected ObjectHandler objectHandler;
 	protected float velocityX;
 	protected float velocityY;
 	protected boolean isJumping;
@@ -18,8 +24,10 @@ public abstract class Actor extends BasicGameObject {
 
 	public Actor(float x, float y, int width, int height,
 			SpriteBatch spritebatch, ShapeRenderer shaperenderer,
-			MovementBehaviour movement, AttackBehaviour attack) {
+			ObjectHandler objectHandler, MovementBehaviour movement,
+			AttackBehaviour attack) {
 		super(x, y, width, height, spritebatch, shaperenderer);
+		this.objectHandler = objectHandler;
 		velocityX = 0;
 		velocityY = 0;
 		isJumping = false;
@@ -27,6 +35,10 @@ public abstract class Actor extends BasicGameObject {
 		this.movements = movement;
 		this.attack = attack;
 		currentAnimation = null;
+	}
+
+	public void update() {
+		collision();
 	}
 
 	public void render() {
@@ -82,5 +94,16 @@ public abstract class Actor extends BasicGameObject {
 
 	public void setFlippedY(boolean flippedY) {
 		this.flippedY = flippedY;
+	}
+
+	private void collision() {
+		ArrayList<BasicGameObject> objects = objectHandler.getSpecificObjects(BasicBlock.class);
+		for (int i = 0; i < objects.size(); i++) {
+			if (objects.get(i).getBounds().overlaps(getBounds())) {
+				isJumping = false;
+			} else {
+				isJumping = true;
+			}
+		}
 	}
 }

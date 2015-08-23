@@ -31,4 +31,21 @@ public class ObjectHandler {
 			o.render();
 		}
 	}
+
+	public ArrayList<BasicGameObject> getObjects() {
+		return gameObjects;
+	}
+
+	public ArrayList<BasicGameObject> getSpecificObjects(Class<?> c) {
+		ArrayList<BasicGameObject> objects = new ArrayList<BasicGameObject>();
+		for (int i = 0; i < gameObjects.size(); i++) {
+			if (gameObjects.get(i).getClass().equals(c)) {
+				objects.add(gameObjects.get(i));
+			}
+		}
+		if (objects.isEmpty()) {
+			objects = null;
+		}
+		return objects;
+	}
 }

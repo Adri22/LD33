@@ -2,6 +2,12 @@ package de.yellowapple.ld33.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+
+import de.yellowapple.ld33.ObjectHandler;
+import de.yellowapple.ld33.objects.levelbuilding.LevelBuildingElement;
 
 public abstract class BasicGameObject {
 
@@ -14,8 +20,8 @@ public abstract class BasicGameObject {
 
 	public BasicGameObject(float x, float y, int width, int height,
 			SpriteBatch spritebatch, ShapeRenderer shaperenderer) {
-		this.posX = x;
-		this.posY = y;
+		this.posX = x * LevelBuildingElement.levelElementWidth;
+		this.posY = y * LevelBuildingElement.levelElementHeight;
 		this.width = width;
 		this.height = height;
 		this.spritebatch = spritebatch;
@@ -52,6 +58,14 @@ public abstract class BasicGameObject {
 
 	public void setPosY(float posY) {
 		this.posY = posY;
+	}
+
+	public Vector3 getPos() {
+		return new Vector3(posX, posY, 0.0f);
+	}
+
+	public Rectangle getBounds() {
+		return new Rectangle((int) posX, (int) posY, (int) width, (int) height);
 	}
 
 	public abstract void update();
